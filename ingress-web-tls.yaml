@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-argo-demo
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: "true"
+    acme.cert-manager.io/http01-ingress-class: "nginx"
+    #acme.cert-manager.io/http01-edit-in-place: "nginx"
+spec:
+  ingressClassName: nginx
+  tls: 
+  - hosts:
+    - argo.alberith.net
+    secretName: argo.alberith.net
+  rules:
+  - host: "argo.alberith.net"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: web
+            port:
+              number: 80
+

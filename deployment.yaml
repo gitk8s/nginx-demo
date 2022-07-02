@@ -16,6 +16,6 @@ spec:
         app: web
     spec:
       containers:
-      - image: quay.io/ocp4git/nginx-web
+      - image: quay.io/ocp4git/nginx-food
         name: nginx-web
         resources: {}
